@@ -383,11 +383,6 @@
                 <div class="value">63.48%</div>
                 <div class="subtext">6,560 iOS Users</div>
             </div>
-            <div class="summary-card green">
-                <h3>IDV Completion</h3>
-                <div class="value">89.59%</div>
-                <div class="subtext">9,258 Verified Users</div>
-            </div>
             <div class="summary-card">
                 <h3>Avg Sessions</h3>
                 <div class="value">13.4</div>
@@ -583,7 +578,7 @@
 
             <div class="insight-box">
                 <h4>💡 Activation Insights</h4>
-                <p>14.20% of organic users completed at least one transaction (1,467 users). The median time to first transaction is 19 hours, though the average is 74.4 hours, suggesting some users take several days to activate. IDV completion is exceptionally high at 89.59%, indicating strong trust signals.</p>
+                <p>14.20% of organic users completed at least one transaction (1,467 users). The median time to first transaction is 19 hours, though the average is 74.4 hours, suggesting some users take several days to activate.</p>
             </div>
 
             <div class="chart-grid">
@@ -611,12 +606,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><strong>IDV Completion</strong></td>
-                        <td>9,258</td>
-                        <td>89.59%</td>
-                        <td><div class="progress-bar"><div class="progress-fill" style="width: 89.59%"></div></div></td>
-                    </tr>
                     <tr>
                         <td><strong>Mobile Wallet Added</strong></td>
                         <td>6,781</td>
@@ -730,7 +719,7 @@
             <div style="display: grid; gap: 1.5rem;">
                 <div class="insight-box" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-left-color: var(--primary);">
                     <h4 style="color: #1e3a8a;">🎯 Improve Activation Rate</h4>
-                    <p style="color: #1e40af;">With only 14.20% activation, focus on converting the 89.59% IDV-completed users. The 19-hour median suggests quick onboarding works—implement targeted push notifications within the first 24 hours to drive first transactions.</p>
+                    <p style="color: #1e40af;">With only 14.20% activation, there's significant opportunity to convert more organic users. The 19-hour median suggests quick onboarding works—implement targeted push notifications within the first 24 hours to drive first transactions.</p>
                 </div>
 
                 <div class="insight-box" style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); border-left-color: var(--secondary);">
@@ -762,8 +751,8 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p>Generated on October 29, 2025 | Data Source: Snowflake MART_EVENTS (Singular)</p>
-            <p style="margin-top: 0.5rem; opacity: 0.6;">MyBambu Analytics Team</p>
+            <p>Data Source: Snowflake MART_EVENTS (Singular)</p>
+            <p style="margin-top: 0.5rem; opacity: 0.6;">MyBambu Paid Ads Team</p>
         </div>
     </div>
 
@@ -943,12 +932,11 @@
         new Chart(featureCtx, {
             type: 'bar',
             data: {
-                labels: ['IDV Completion', 'Mobile Wallet', 'Biometrics', 'Cash Load', 'P2P Send', 'TopUp'],
+                labels: ['Mobile Wallet', 'Biometrics', 'Cash Load', 'P2P Send', 'TopUp'],
                 datasets: [{
                     label: 'Adoption Rate %',
-                    data: [89.59, 65.63, 37.25, 9.13, 4.61, 1.07],
+                    data: [65.63, 37.25, 9.13, 4.61, 1.07],
                     backgroundColor: [
-                        chartColors.secondary,
                         chartColors.primary,
                         chartColors.cyan,
                         chartColors.accent,

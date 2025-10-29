@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>October 2025 Organic User Analysis | MyBambu</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --border: #e5e7eb;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px var(--shadow);
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .report-date {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Executive Summary Cards */
+        .executive-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--light);
+        }
+
+        .summary-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px var(--shadow);
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px var(--shadow);
+        }
+
+        .summary-card.green {
+            border-left-color: var(--secondary);
+        }
+
+        .summary-card.orange {
+            border-left-color: var(--accent);
+        }
+
+        .summary-card.red {
+            border-left-color: var(--danger);
+        }
+
+        .summary-card h3 {
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .summary-card .value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .summary-card .subtext {
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 3rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .section-header h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Chart Container */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .chart-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px var(--shadow);
+        }
+
+        .data-table thead {
+            background: var(--primary);
+            color: white;
+        }
+
+        .data-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--light);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            background: var(--border);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        /* Insight Box */
+        .insight-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .insight-box h4 {
+            color: #92400e;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .insight-box p {
+            color: #78350f;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .executive-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge.high {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge.medium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge.low {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>🌱 Organic User Analysis</h1>
+                <p>Deep Dive into October 2025 Organic Growth</p>
+                <span class="report-date">📅 October 1-29, 2025</span>
+            </div>
+        </div>
+
+        <!-- Executive Summary -->
+        <div class="executive-summary">
+            <div class="summary-card green">
+                <h3>Total Organic Users</h3>
+                <div class="value">9,869</div>
+                <div class="subtext">Unique Acquisitions</div>
+            </div>
+            <div class="summary-card orange">
+                <h3>Activation Rate</h3>
+                <div class="value">14.20%</div>
+                <div class="subtext">1,467 Activated Users</div>
+            </div>
+            <div class="summary-card">
+                <h3>iOS Dominance</h3>
+                <div class="value">63.48%</div>
+                <div class="subtext">6,560 iOS Users</div>
+            </div>
+            <div class="summary-card green">
+                <h3>IDV Completion</h3>
+                <div class="value">89.59%</div>
+                <div class="subtext">9,258 Verified Users</div>
+            </div>
+            <div class="summary-card">
+                <h3>Avg Sessions</h3>
+                <div class="value">13.4</div>
+                <div class="subtext">Per User in October</div>
+            </div>
+            <div class="summary-card orange">
+                <h3>Power Users</h3>
+                <div class="value">72.50%</div>
+                <div class="subtext">50+ Events Each</div>
+            </div>
+        </div>
+
+        <!-- Geographic Distribution -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🗺️</div>
+                <h2>Geographic Distribution</h2>
+            </div>
+
+            <div class="insight-box">
+                <h4>💡 Key Insight</h4>
+                <p>Texas dominates organic user acquisition with 24.88% of all users, led by Houston (908 users) and Dallas (587 users). The top 5 states (TX, CA, FL, NC, LA) account for over 53% of all organic users.</p>
+            </div>
+
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Top 10 States by User Count</div>
+                    <div class="chart-wrapper">
+                        <canvas id="statesChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Top 10 Cities by User Count</div>
+                    <div class="chart-wrapper">
+                        <canvas id="citiesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>State</th>
+                        <th>Users</th>
+                        <th>% of Total</th>
+                        <th>Distribution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Texas</strong></td>
+                        <td>2,558</td>
+                        <td>24.88%</td>
+                        <td><div class="progress-bar"><div class="progress-fill" style="width: 24.88%"></div></div></td>
+                    </tr>
+                    <tr>
+                        <td><strong>California</strong></td>
+                        <td>969</td>
+                        <td>9.42%</td>
+                        <td><div class="progress-bar"><div class="progress-fill" style="width: 9.42%"></div></div></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Florida</strong></td>
+                        <td>744</td>
+                        <td>7.24%</td>
+                        <td><div class="progress-bar"><div class="progress-fill" style="width: 7.24%"></div></div></td>
+                    </tr>
+                    <tr>
+                        <td><strong>North Carolina</strong></td>
+                        <td>702</td>
+                        <td>6.83%</td>
+                        <td><div class="progress-bar"><div class="progress-fill" style="width: 6.83%"></div></div></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Louisiana</strong></td>
+                        <td>528</td>
+                        <td>5.13%</td>
+                        <td><div class="progress-bar"><div class="progress-fill" style="width: 5.13%"></div></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Platform & Device Analysis -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📱</div>
+                <h2>Platform & Device Analysis</h2>
+            </div>
+
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Platform Distribution</div>
+                    <div class="chart-wrapper">
+                        <canvas id="platformChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Daily Acquisition Trend</div>
+                    <div class="chart-wrapper">
+                        <canvas id="dailyTrendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <h4>💡 Platform Insights</h4>
+                <p>iOS users represent nearly 2/3 of organic acquisitions (63.48%). The dominant app versions are 4.8.5 (iOS - 63.37%) and 4.8.3 (Android - 36.47%). Daily acquisition peaked on October 8th with 644 new users and showed weekend dips throughout the month.</p>
+            </div>
+        </div>
+
+        <!-- User Behavior & Engagement -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">⚡</div>
+                <h2>User Behavior & Engagement</h2>
+            </div>
+
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Engagement Cohorts</div>
+                    <div class="chart-wrapper">
+                        <canvas id="engagementChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Top User Actions</div>
+                    <div class="chart-wrapper">
+                        <canvas id="actionsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <h4>💡 Engagement Insights</h4>
+                <p>72.5% of organic users are "power users" with 50+ events, averaging 142.8 events and 6.1 active days. Only 0.24% are truly dormant (2-5 events). The median user has 8 sessions, with login actions dominating at 81,005 total events across 6,220 unique users.</p>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Engagement Level</th>
+                        <th>Users</th>
+                        <th>% of Total</th>
+                        <th>Avg Events</th>
+                        <th>Avg Active Days</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Power Users</strong></td>
+                        <td>7,492</td>
+                        <td>72.50%</td>
+                        <td>142.8</td>
+                        <td>6.1</td>
+                        <td><span class="badge high">High</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Active</strong></td>
+                        <td>2,495</td>
+                        <td>24.14%</td>
+                        <td>38.8</td>
+                        <td>1.9</td>
+                        <td><span class="badge medium">Medium</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Moderate</strong></td>
+                        <td>322</td>
+                        <td>3.12%</td>
+                        <td>14.9</td>
+                        <td>1.5</td>
+                        <td><span class="badge medium">Medium</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Low Activity</strong></td>
+                        <td>25</td>
+                        <td>0.24%</td>
+                        <td>4.2</td>
+                        <td>1.1</td>
+                        <td><span class="badge low">Low</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Activation & Feature Adoption -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <h2>Activation & Feature Adoption</h2>
+            </div>
+
+            <div class="insight-box">
+                <h4>💡 Activation Insights</h4>
+                <p>14.20% of organic users completed at least one transaction (1,467 users). The median time to first transaction is 19 hours, though the average is 74.4 hours, suggesting some users take several days to activate. IDV completion is exceptionally high at 89.59%, indicating strong trust signals.</p>
+            </div>
+
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Feature Adoption Rates</div>
+                    <div class="chart-wrapper">
+                        <canvas id="featureChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Transaction Types Distribution</div>
+                    <div class="chart-wrapper">
+                        <canvas id="transactionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Adopted Users</th>
+                        <th>Adoption Rate</th>
+                        <th>Progress</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>IDV Completion</strong></td>
+                        <td>9,258</td>
+                        <td>89.59%</td>
+                        <td><div class="progress-bar"><div class="progress-fill" style="width: 89.59%"></div></div></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mobile Wallet Added</strong></td>
+                        <td>6,781</td>
+                        <td>65.63%</td>
+                        <td><div class="progress-bar"><div class="progress-fill" style="width: 65.63%"></div></div></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biometrics Setup</strong></td>
+                        <td>3,849</td>
+                        <td>37.25%</td>
+                        <td><div class="progress-bar"><div class="progress-fill" style="width: 37.25%"></div></div></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cash Load</strong></td>
+                        <td>943</td>
+                        <td>9.13%</td>
+                        <td><div class="progress-bar"><div class="progress-fill" style="width: 9.13%"></div></div></td>
+                    </tr>
+                    <tr>
+                        <td><strong>P2P Send</strong></td>
+                        <td>476</td>
+                        <td>4.61%</td>
+                        <td><div class="progress-bar"><div class="progress-fill" style="width: 4.61%"></div></div></td>
+                    </tr>
+                    <tr>
+                        <td><strong>TopUp Purchase</strong></td>
+                        <td>111</td>
+                        <td>1.07%</td>
+                        <td><div class="progress-bar"><div class="progress-fill" style="width: 1.07%"></div></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Acquisition Trends -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <h2>Acquisition Trends</h2>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Weekly Acquisition Trend by Platform</div>
+                <div class="chart-wrapper">
+                    <canvas id="weeklyTrendChart"></canvas>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <h4>💡 Trend Analysis</h4>
+                <p>Week 41 (Oct 7-13) was the strongest acquisition week with 3,278 new users. There's a clear declining trend starting in Week 42, dropping from 2,484 users to just 529 in Week 44 (partial week). iOS consistently outpaces Android by roughly 2:1 ratio across all weeks.</p>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Week</th>
+                        <th>iOS Users</th>
+                        <th>Android Users</th>
+                        <th>Total Users</th>
+                        <th>Week-over-Week Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Week 40</strong> (Sep 30 - Oct 6)</td>
+                        <td>1,516</td>
+                        <td>902</td>
+                        <td>2,418</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Week 41</strong> (Oct 7-13)</td>
+                        <td>2,107</td>
+                        <td>1,171</td>
+                        <td>3,278</td>
+                        <td><span class="badge high">+35.6%</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Week 42</strong> (Oct 14-20)</td>
+                        <td>1,653</td>
+                        <td>831</td>
+                        <td>2,484</td>
+                        <td><span class="badge low">-24.2%</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Week 43</strong> (Oct 21-27)</td>
+                        <td>973</td>
+                        <td>685</td>
+                        <td>1,658</td>
+                        <td><span class="badge low">-33.3%</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Week 44</strong> (Oct 28-29)</td>
+                        <td>317</td>
+                        <td>212</td>
+                        <td>529</td>
+                        <td><span class="badge medium">Partial</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Key Recommendations -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">💎</div>
+                <h2>Key Recommendations</h2>
+            </div>
+
+            <div style="display: grid; gap: 1.5rem;">
+                <div class="insight-box" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-left-color: var(--primary);">
+                    <h4 style="color: #1e3a8a;">🎯 Improve Activation Rate</h4>
+                    <p style="color: #1e40af;">With only 14.20% activation, focus on converting the 89.59% IDV-completed users. The 19-hour median suggests quick onboarding works—implement targeted push notifications within the first 24 hours to drive first transactions.</p>
+                </div>
+
+                <div class="insight-box" style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); border-left-color: var(--secondary);">
+                    <h4 style="color: #065f46;">💰 Leverage Texas Market Dominance</h4>
+                    <p style="color: #047857;">Texas represents 25% of organic users. Invest in localized marketing, partnerships, and community building in Houston, Dallas, and San Antonio to maximize this stronghold.</p>
+                </div>
+
+                <div class="insight-box" style="background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); border-left-color: #ec4899;">
+                    <h4 style="color: #9f1239;">📱 Optimize iOS Experience</h4>
+                    <p style="color: #be123c;">iOS users comprise 63.48% of organic growth. Prioritize iOS feature development, App Store optimization, and iOS-specific marketing campaigns to capitalize on this platform preference.</p>
+                </div>
+
+                <div class="insight-box" style="background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); border-left-color: #9333ea;">
+                    <h4 style="color: #581c87;">⚡ Reverse Declining Trend</h4>
+                    <p style="color: #6b21a8;">The 33.3% week-over-week drop (Week 42 to 43) signals concern. Investigate what changed mid-October and implement retention campaigns, referral programs, or seasonal promotions to revitalize growth.</p>
+                </div>
+
+                <div class="insight-box">
+                    <h4 style="color: #92400e;">🚀 Activate Power Users for Referrals</h4>
+                    <p style="color: #78350f;">With 72.5% power users averaging 142.8 events, they're highly engaged. Launch a referral program targeting this segment to drive organic growth through word-of-mouth.</p>
+                </div>
+
+                <div class="insight-box" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left-color: var(--accent);">
+                    <h4 style="color: #92400e;">🎁 Increase Feature Discovery</h4>
+                    <p style="color: #78350f;">Low adoption rates for Cash Load (9.13%) and P2P Send (4.61%) suggest users aren't discovering key features. Implement in-app tutorials, progressive onboarding, and incentivized first-use promotions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Generated on October 29, 2025 | Data Source: Snowflake MART_EVENTS (Singular)</p>
+            <p style="margin-top: 0.5rem; opacity: 0.6;">MyBambu Analytics Team</p>
+        </div>
+    </div>
+
+    <script>
+        // Chart configurations
+        const chartColors = {
+            primary: '#3b82f6',
+            secondary: '#10b981',
+            accent: '#f59e0b',
+            danger: '#ef4444',
+            purple: '#8b5cf6',
+            pink: '#ec4899',
+            cyan: '#06b6d4',
+            slate: '#64748b'
+        };
+
+        // States Chart
+        const statesCtx = document.getElementById('statesChart').getContext('2d');
+        new Chart(statesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Texas', 'California', 'Florida', 'N. Carolina', 'Louisiana', 'New York', 'Georgia', 'Illinois', 'Pennsylvania', 'Michigan'],
+                datasets: [{
+                    label: 'Users',
+                    data: [2558, 969, 744, 702, 528, 501, 416, 307, 283, 280],
+                    backgroundColor: chartColors.primary,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Cities Chart
+        const citiesCtx = document.getElementById('citiesChart').getContext('2d');
+        new Chart(citiesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Houston', 'Dallas', 'Los Angeles', 'Charlotte', 'Chicago', 'Miami', 'Atlanta', 'Brooklyn', 'Detroit', 'Baton Rouge'],
+                datasets: [{
+                    label: 'Users',
+                    data: [908, 587, 363, 352, 229, 188, 187, 173, 170, 170],
+                    backgroundColor: chartColors.secondary,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Platform Chart
+        const platformCtx = document.getElementById('platformChart').getContext('2d');
+        new Chart(platformCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['iOS', 'Android'],
+                datasets: [{
+                    data: [6560, 3774],
+                    backgroundColor: [chartColors.primary, chartColors.secondary],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Daily Trend Chart
+        const dailyTrendCtx = document.getElementById('dailyTrendChart').getContext('2d');
+        new Chart(dailyTrendCtx, {
+            type: 'line',
+            data: {
+                labels: ['Oct 1', 'Oct 2', 'Oct 3', 'Oct 4', 'Oct 5', 'Oct 6', 'Oct 7', 'Oct 8', 'Oct 9', 'Oct 10', 'Oct 11', 'Oct 12', 'Oct 13', 'Oct 14', 'Oct 15', 'Oct 16', 'Oct 17', 'Oct 18', 'Oct 19', 'Oct 20', 'Oct 21', 'Oct 22', 'Oct 23', 'Oct 24', 'Oct 25', 'Oct 26', 'Oct 27', 'Oct 28', 'Oct 29'],
+                datasets: [{
+                    label: 'iOS',
+                    data: [369, 418, 314, 225, 191, 310, 303, 428, 320, 363, 229, 158, 373, 345, 364, 155, 145, 136, 136, 133, 148, 147, 135, 144, 136, 135, 160, 130, 27],
+                    borderColor: chartColors.primary,
+                    backgroundColor: chartColors.primary + '20',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Android',
+                    data: [231, 196, 211, 141, 128, 204, 163, 216, 199, 162, 123, 113, 122, 127, 171, 118, 94, 97, 115, 103, 91, 88, 126, 99, 98, 95, 98, 95, 20],
+                    borderColor: chartColors.secondary,
+                    backgroundColor: chartColors.secondary + '20',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Engagement Chart
+        const engagementCtx = document.getElementById('engagementChart').getContext('2d');
+        new Chart(engagementCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Power Users (50+)', 'Active (21-50)', 'Moderate (6-20)', 'Low (2-5)'],
+                datasets: [{
+                    data: [7492, 2495, 322, 25],
+                    backgroundColor: [chartColors.secondary, chartColors.primary, chartColors.accent, chartColors.danger],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Actions Chart
+        const actionsCtx = document.getElementById('actionsChart').getContext('2d');
+        new Chart(actionsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Login', 'Sessions', 'Login Selected', 'Home Icon', 'Dashboard', 'Profile Icon'],
+                datasets: [{
+                    label: 'Total Events',
+                    data: [81005, 55791, 51565, 46106, 41695, 39234],
+                    backgroundColor: chartColors.purple,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Feature Chart
+        const featureCtx = document.getElementById('featureChart').getContext('2d');
+        new Chart(featureCtx, {
+            type: 'bar',
+            data: {
+                labels: ['IDV Completion', 'Mobile Wallet', 'Biometrics', 'Cash Load', 'P2P Send', 'TopUp'],
+                datasets: [{
+                    label: 'Adoption Rate %',
+                    data: [89.59, 65.63, 37.25, 9.13, 4.61, 1.07],
+                    backgroundColor: [
+                        chartColors.secondary,
+                        chartColors.primary,
+                        chartColors.cyan,
+                        chartColors.accent,
+                        chartColors.purple,
+                        chartColors.pink
+                    ],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        // Transaction Chart
+        const transactionCtx = document.getElementById('transactionChart').getContext('2d');
+        new Chart(transactionCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Cash Load', 'P2P Send', 'TopUp Purchase'],
+                datasets: [{
+                    data: [943, 476, 111],
+                    backgroundColor: [chartColors.accent, chartColors.purple, chartColors.pink],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Weekly Trend Chart
+        const weeklyTrendCtx = document.getElementById('weeklyTrendChart').getContext('2d');
+        new Chart(weeklyTrendCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Week 40', 'Week 41', 'Week 42', 'Week 43', 'Week 44'],
+                datasets: [{
+                    label: 'iOS',
+                    data: [1516, 2107, 1653, 973, 317],
+                    backgroundColor: chartColors.primary,
+                    borderRadius: 8
+                }, {
+                    label: 'Android',
+                    data: [902, 1171, 831, 685, 212],
+                    backgroundColor: chartColors.secondary,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stacked: true
+                    },
+                    x: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

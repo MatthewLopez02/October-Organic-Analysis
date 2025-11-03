@@ -390,8 +390,8 @@
             </div>
             <div class="summary-card orange">
                 <h3>High Engagement</h3>
-                <div class="value">0.03%</div>
-                <div class="subtext">3 High Engagement</div>
+                <div class="value">0.46%</div>
+                <div class="subtext">50 High Engagement</div>
             </div>
         </div>
 
@@ -606,7 +606,7 @@
 
             <div class="insight-box">
                 <h4>💡 Engagement Insights</h4>
-                <p>Only 0.03% of organic users are highly engaged with 50+ important actions. 98.22% remain inactive with fewer than 5 important actions completed. This shows that while users may browse the app, converting them to perform key revenue-generating actions remains a challenge.</p>
+                <p>Only 0.46% of organic users are highly engaged with 10+ important actions (50 users). 71.87% remain completely inactive with zero revenue-generating actions. An additional 17.28% completed only 1 action. This reveals a critical conversion funnel problem—most users sign up but never perform meaningful transactions.</p>
             </div>
 
             <table class="data-table">
@@ -622,30 +622,37 @@
                 <tbody>
                     <tr>
                         <td><strong>High Engagement</strong></td>
-                        <td>3</td>
-                        <td>0.03%</td>
-                        <td>66.7</td>
+                        <td>50</td>
+                        <td>0.46%</td>
+                        <td>18.1</td>
                         <td><span class="badge high">High</span></td>
                     </tr>
                     <tr>
                         <td><strong>Medium Engagement</strong></td>
-                        <td>7</td>
-                        <td>0.06%</td>
-                        <td>26.9</td>
+                        <td>186</td>
+                        <td>1.70%</td>
+                        <td>6.2</td>
                         <td><span class="badge medium">Medium</span></td>
                     </tr>
                     <tr>
                         <td><strong>Low Engagement</strong></td>
-                        <td>185</td>
-                        <td>1.69%</td>
-                        <td>7.4</td>
+                        <td>954</td>
+                        <td>8.70%</td>
+                        <td>2.6</td>
                         <td><span class="badge medium">Medium</span></td>
                     </tr>
                     <tr>
+                        <td><strong>Very Low</strong></td>
+                        <td>1,895</td>
+                        <td>17.28%</td>
+                        <td>1.0</td>
+                        <td><span class="badge low">Low</span></td>
+                    </tr>
+                    <tr>
                         <td><strong>Inactive</strong></td>
-                        <td>10,772</td>
-                        <td>98.22%</td>
-                        <td>0.4</td>
+                        <td>7,882</td>
+                        <td>71.87%</td>
+                        <td>0.0</td>
                         <td><span class="badge low">Low</span></td>
                     </tr>
                 </tbody>
@@ -821,7 +828,7 @@
 
                 <div class="insight-box">
                     <h4 style="color: #92400e;">🚀 Critical Engagement Problem</h4>
-                    <p style="color: #78350f;">Only 0.03% of users are highly engaged with key revenue actions, while 98.22% remain inactive. This indicates a severe conversion problem. Urgently implement push notifications, in-app messaging, and incentive campaigns to drive users toward their first transaction.</p>
+                    <p style="color: #78350f;">Only 0.46% of users are highly engaged (10+ actions), while 71.87% never complete a single revenue action. An additional 17.28% complete only 1 action and churn. This indicates a severe activation and retention problem. Urgently implement onboarding optimization, push notifications, and first-transaction incentives.</p>
                 </div>
 
                 <div class="insight-box" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left-color: var(--accent);">
@@ -958,10 +965,10 @@
         new Chart(engagementCtx, {
             type: 'pie',
             data: {
-                labels: ['High Engagement (50+)', 'Medium (20-49)', 'Low (5-19)', 'Inactive (<5)'],
+                labels: ['High (10+)', 'Medium (5-9)', 'Low (2-4)', 'Very Low (1)', 'Inactive (0)'],
                 datasets: [{
-                    data: [3, 7, 185, 10772],
-                    backgroundColor: [chartColors.secondary, chartColors.primary, chartColors.accent, chartColors.danger],
+                    data: [50, 186, 954, 1895, 7882],
+                    backgroundColor: [chartColors.secondary, chartColors.primary, chartColors.accent, chartColors.pink, chartColors.danger],
                     borderWidth: 0
                 }]
             },

@@ -659,6 +659,37 @@
             </table>
         </div>
 
+        <!-- Churn Analysis -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">⚠️</div>
+                <h2>Churn Analysis</h2>
+            </div>
+
+            <div class="executive-summary" style="background: white; padding: 1.5rem;">
+                <div class="summary-card red">
+                    <h3>Total New Accounts</h3>
+                    <div class="value">16,508</div>
+                    <div class="subtext">October 2025</div>
+                </div>
+                <div class="summary-card red">
+                    <h3>Closed Accounts</h3>
+                    <div class="value">827</div>
+                    <div class="subtext">Churned in October</div>
+                </div>
+                <div class="summary-card red">
+                    <h3>Churn Rate</h3>
+                    <div class="value">5.01%</div>
+                    <div class="subtext">Early Churn Signal</div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border-left-color: var(--danger);">
+                <h4 style="color: #991b1b;">💡 Churn Insights</h4>
+                <p style="color: #991b1b;">5.01% of new accounts opened in October have already closed (827 out of 16,508 accounts). This early-stage churn indicates users are signing up but quickly abandoning the platform. Given that 71.87% of users never complete a single revenue-generating action, the churn problem is likely driven by poor activation—users don't find value before they leave. Addressing the activation gap should be the top priority to reduce churn.</p>
+            </div>
+        </div>
+
         <!-- Activation & Feature Adoption -->
         <div class="section">
             <div class="section-header">
@@ -722,6 +753,51 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class="insight-box" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-left-color: var(--primary);">
+                <h4 style="color: #1e3a8a;">🚀 How to Improve Activation: Strategic Recommendations</h4>
+                <p style="color: #1e40af; margin-bottom: 1rem;"><strong>Current State:</strong> 27.56% activation rate with 3,023 activated users out of 10,967 total organic users.</p>
+
+                <p style="color: #1e40af; margin-bottom: 1rem;"><strong>Analysis of Easiest Wins:</strong></p>
+                <ul style="color: #1e40af; margin-left: 1.5rem; margin-bottom: 1rem; line-height: 1.8;">
+                    <li><strong>Card Activation is your strongest lever:</strong> At 24.49% adoption, this is already your most successful feature. The 2,686 users who activated cards represent 89% of all activated users. Focus here first.</li>
+                    <li><strong>The "Very Low" segment (1,895 users with 1 action) is your biggest opportunity:</strong> These users already took one step—they're on the edge of activation. Converting just 30% of them would add 568 activated users.</li>
+                    <li><strong>Quick funding converts to activation:</strong> 28.35% funding rate with median time of 20 hours shows fast-moving users exist. These quick funders are likely your easiest activation targets.</li>
+                </ul>
+
+                <p style="color: #1e40af; margin-bottom: 1rem;"><strong>Easy Wins - Immediate Actions (0-2 weeks):</strong></p>
+                <ol style="color: #1e40af; margin-left: 1.5rem; margin-bottom: 1rem; line-height: 1.8;">
+                    <li><strong>Push notification for card activation:</strong> Send targeted push to the 3,109 funded users who haven't activated cards (28.35% funded vs 24.49% card activated = ~423 users). Expected impact: +200-250 activated users.</li>
+                    <li><strong>In-app prompt after first funding:</strong> Immediately after cashload_completed event, show modal encouraging first P2P transaction with $5 bonus. Target the quick funders (median 20 hours). Expected impact: +150-200 activated users.</li>
+                    <li><strong>Email campaign to "Very Low" users:</strong> Target the 1,895 users with exactly 1 action completed. Show them what they can do next with clear CTAs. Expected impact: +100-150 activated users.</li>
+                </ol>
+
+                <p style="color: #1e40af; margin-bottom: 1rem;"><strong>Medium-Term Optimizations (2-4 weeks):</strong></p>
+                <ol start="4" style="color: #1e40af; margin-left: 1.5rem; margin-bottom: 1rem; line-height: 1.8;">
+                    <li><strong>Optimize onboarding for card activation:</strong> Since card activation drives 89% of your activations, streamline the card ordering process. Add progress indicators and set clear expectations on delivery time (currently 9.9 days avg). Expected impact: Increase card activation from 24.49% to 28-30%, adding ~400 users.</li>
+                    <li><strong>First-transaction bonus program:</strong> Offer $3-5 bonus for completing ANY revenue action within 48 hours of signup. This creates urgency. Expected impact: +300-400 activated users.</li>
+                    <li><strong>Funded-but-not-activated recovery campaign:</strong> Weekly automated outreach to users who funded but haven't completed a transaction in 7+ days. Expected impact: +150-200 activated users.</li>
+                </ol>
+
+                <p style="color: #1e40af; margin-bottom: 1rem;"><strong>Projected Outcome:</strong></p>
+                <p style="color: #1e40af; margin-bottom: 0.5rem;"><strong>Conservative Estimate (Easy Wins Only):</strong></p>
+                <ul style="color: #1e40af; margin-left: 1.5rem; margin-bottom: 1rem;">
+                    <li>Current: 3,023 activated users (27.56%)</li>
+                    <li>Additional activated: +450-600 users</li>
+                    <li>New total: 3,473-3,623 activated users</li>
+                    <li><strong>New activation rate: 31.7-33.0%</strong></li>
+                </ul>
+
+                <p style="color: #1e40af; margin-bottom: 0.5rem;"><strong>Optimistic Estimate (Easy Wins + Medium-Term):</strong></p>
+                <ul style="color: #1e40af; margin-left: 1.5rem;">
+                    <li>Current: 3,023 activated users (27.56%)</li>
+                    <li>Additional activated: +1,000-1,300 users</li>
+                    <li>New total: 4,023-4,323 activated users</li>
+                    <li><strong>New activation rate: 36.7-39.4%</strong></li>
+                </ul>
+
+                <p style="color: #1e40af; margin-top: 1rem;"><strong>Bottom Line:</strong> By focusing on card activation optimization and targeting users who've shown intent (funded accounts, completed 1 action), you can realistically improve activation from 27.56% to 32-39% within 4-6 weeks. The easiest and fastest path is converting the 1,895 "Very Low" users who are already engaged but need one more push.</p>
+            </div>
         </div>
 
         <!-- Acquisition Trends -->
